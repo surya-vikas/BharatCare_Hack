@@ -1,24 +1,44 @@
+/* ===========================
+   ROOT CONTAINER
+   ===========================
+   ⚠️ This is Vite starter styling.
+   It CENTER-LOCKS your entire app.
+   Keep for now, but REMOVE later
+   if you want full-width layouts.
+*/
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  
-  text-align: center;
+  max-width: 1280px; /* limits app width */
+  margin: 0 auto;    /* centers app horizontally */
+  padding: 2rem;     /* global padding */
+  text-align: center; /* ⚠️ affects all text alignment */
 }
 
+/* ===========================
+   LOGO STYLES (VITE DEMO)
+   ❌ NOT USED IN YOUR PROJECT
+   Safe to delete later
+*/
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
+
+/* Hover glow effect – demo only */
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
+/* React logo hover – demo only */
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+/* ===========================
+   LOGO SPIN ANIMATION
+   ❌ DEMO ONLY
+*/
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -28,16 +48,26 @@
   }
 }
 
+/* Enables logo animation if motion allowed */
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
 }
 
+/* ===========================
+   CARD STYLING
+   ⚠️ Generic utility class
+   Optional, not used yet
+*/
 .card {
   padding: 2em;
 }
 
+/* ===========================
+   DOCS TEXT
+   ❌ VITE DEMO ONLY
+*/
 .read-the-docs {
   color: #888;
 }
