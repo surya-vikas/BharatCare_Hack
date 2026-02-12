@@ -15,11 +15,6 @@ const medicineSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    pharmacy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Pharmacy",
-      required: true,
-    },
   },
   { timestamps: true }
 );

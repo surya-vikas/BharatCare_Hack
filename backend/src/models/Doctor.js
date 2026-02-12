@@ -16,10 +16,6 @@ const doctorSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
-    isApproved: {
-      type: Boolean,
-      default: false,
-    },
     availability: [
       {
         day: {

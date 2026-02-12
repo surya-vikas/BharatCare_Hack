@@ -12,6 +12,7 @@ import orderRoutes from "./routes/orderRoutes.js";
 import prescriptionRoutes from "./routes/prescriptionRoutes.js";
 import pharmacyRoutes from "./routes/pharmacyRoutes.js";
 import testRoutes from "./routes/testRoutes.js";
+import medicineRoutes from "./routes/medicineRoutes.js";
 
 const app = express();   // 🔥 MUST COME BEFORE app.use
 
@@ -29,6 +30,10 @@ app.use("/api/test", testRoutes);
 app.get("/", (req, res) => {
   res.send("BharathCare API running");
 });
+
+app.use("/auth", authRoutes);
+app.use("/test", testRoutes);
+app.use("/medicines", medicineRoutes);
 
 const PORT = process.env.PORT || 5000;
 

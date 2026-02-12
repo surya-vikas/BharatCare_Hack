@@ -103,22 +103,3 @@ export const updateOrderStatus = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-// GET /orders/my
-export const getMyOrders = async (req, res) => {
-  try {
-    const userId = req.user.id;
-
-    if (!userId) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-
-    const orders = await Order.find({ userId })
-      .populate("items.medicineId", "name price")
-      .populate("pharmacyId", "name address city")
-      .sort({ createdAt: -1 });
-
-    res.json(orders);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};

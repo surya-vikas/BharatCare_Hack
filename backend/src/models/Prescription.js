@@ -1,17 +1,35 @@
 import mongoose from "mongoose";
 
-const prescriptionSchema = new mongoose.Schema({
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+const prescriptionSchema = new mongoose.Schema(
+  {
+    doctorId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    patientId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    medicines: [
+      {
+        medicineId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Medicine",
+          required: true,
+        },
+        dosage: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+    notes: {
+      type: String,
+    },
   },
-  filePath: String,
-  uploadedAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
+  { timestamps: true }
+);
 
-const Prescription = mongoose.model("Prescription", prescriptionSchema);
-
-export default Prescription;
+export default mongoose.model("Prescription", prescriptionSchema);

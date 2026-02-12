@@ -1,22 +1,10 @@
 import express from "express";
-import Medicine from "../models/Medicine.js";
+import { searchMedicines } from "../controllers/medicineController.js";
+import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// POST /medicines
-router.post("/", async (req, res) => {
-  try {
-    const medicine = await Medicine.create(req.body);
-    res.status(201).json(medicine);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
-
-// GET /medicines
-router.get("/", async (req, res) => {
-  const medicines = await Medicine.find();
-  res.json(medicines);
-});
+// Any logged-in user can search
+router.get("/search", protect, searchMedicines);
 
 export default router;

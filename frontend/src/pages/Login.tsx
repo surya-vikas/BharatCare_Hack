@@ -107,20 +107,23 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const data = await login(email, password);
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("role", data.role);
-      localStorage.setItem("name", data.name);
-      localStorage.setItem("email", data.email);
-      
-      // 🔥 Role-based redirect
-      if (data.role === "admin") {
-        navigate("/admin/dashboard");
-      } else if (data.role === "doctor") {
-        navigate("/doctor/dashboard");
-      } else {
-        navigate("/user/dashboard");
+      const response = await login(email, password);
+      console.log("LOGIN RESPONSE:", response);
+
+      if (!response?.token) {
+        throw new Error("Token not received");
       }
+
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("role", response.role);
+      localStorage.setItem("name", response.name);
+
+      if (response.role === "admin") {
+        navigate("/admin", { replace: true });
+      } else {
+        navigate("/dashboard", { replace: true });
+      }
+
     } catch (err: any) {
       setError(err.response?.data?.message || "Login failed");
     }
