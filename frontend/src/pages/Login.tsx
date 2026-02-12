@@ -77,17 +77,23 @@ export default function Login() {
     e.preventDefault();
     setError("");
     try {
-      const data = await login(email, password);
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("role", data.role);
-        localStorage.setItem("name", data.name);
-        localStorage.setItem("email", data.email);
-        if      (data.role === "patient")  navigate("/user",     { replace: true });
-        else if (data.role === "doctor")   navigate("/doctor",   { replace: true });
-        else if (data.role === "pharmacy") navigate("/pharmacy", { replace: true });
-        else if (data.role === "admin")    navigate("/admin",    { replace: true });
+      const response = await login(email, password);
+      console.log("LOGIN RESPONSE:", response);
+
+      if (!response?.token) {
+        throw new Error("Token not received");
       }
+
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("role", response.role);
+      localStorage.setItem("name", response.name);
+
+      if (response.role === "admin") {
+        navigate("/admin", { replace: true });
+      } else {
+        navigate("/dashboard", { replace: true });
+      }
+
     } catch (err: any) {
       setError(err.response?.data?.message || "Login failed. Please try again.");
     }
